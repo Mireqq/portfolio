@@ -4,6 +4,13 @@ import "./portfolio.css";
 export default function Portfolio() {
   const projects = [
     {
+      title: "AI Portfolio Chatbot",
+      description:
+        "Interactive AI chatbot integrated into my portfolio, answering questions about my experience, projects, and skills in real time. Built using React and deployed with serverless functions on Vercel using the OpenAI API.",
+      tech: "React, Vercel, OpenAI API, JavaScript, Serverless Functions",
+      link: "https://github.com/Mireqq/portfolio",
+    },
+    {
       title: "Multimodal Depression Severity Classifier",
       description:
         "Real-time machine learning system integrating speech and text pipelines for depression severity classification. Built with a Flask backend API and deployed with Docker.",
