@@ -38,23 +38,37 @@ export default function Chatbot() {
       });
 
       const data = await res.json();
+      const reply = data.reply || "No reply received.";
 
-      setMessages((m) => [
-        ...m,
-        {
-          role: "bot",
-          text: data.reply || "No reply received.",
-        },
-      ]);
+      setMessages((m) => [...m, { role: "bot", text: "" }]);
+
+      let i = 0;
+
+      const interval = setInterval(() => {
+        i++;
+
+        setMessages((m) => {
+          const updated = [...m];
+          updated[updated.length - 1] = {
+            ...updated[updated.length - 1],
+            text: reply.slice(0, i),
+          };
+          return updated;
+        });
+
+        if (i >= reply.length) {
+          clearInterval(interval);
+          setLoading(false);
+        }
+      }, 15);
     } catch (error) {
       setMessages((m) => [
         ...m,
         {
           role: "bot",
-          text: "Error connecting to chatbot backend.",
+          text: "Temporary issue — please try again.",
         },
       ]);
-    } finally {
       setLoading(false);
     }
   }
@@ -74,14 +88,17 @@ export default function Chatbot() {
                 {m.text}
               </div>
             ))}
-            {loading && <div className="msg bot">Thinking...</div>}
+            {loading && <div className="msg bot loading">Typing</div>}
           </div>
 
           <form onSubmit={onSend} className="chat-form">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me about Miroslaw Mus..."
+              placeholder={
+                loading ? "Thinking..." : "Ask me about Miroslaw Mus..."
+              }
+              disabled={loading}
             />
             <button className="btn" type="submit" disabled={loading}>
               {loading ? "..." : "Send"}
