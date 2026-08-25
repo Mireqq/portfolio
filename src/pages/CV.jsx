@@ -5,22 +5,44 @@ export default function CV() {
     <main className="page">
       <section className="card">
         <div className="header-row">
-          <h1>Curriculum Vitae</h1>
+          <div>
+            <h1>Curriculum Vitae</h1>
+            <p className="muted">
+              Data Analyst | First-Class Computer Science Graduate
+            </p>
+          </div>
+
           <div className="btn-row">
-            <a href={cvUrl} target="_blank" rel="noopener" className="btn">
-              Open PDF
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+            >
+              Open CV
             </a>
-            <a href={cvUrl} download className="btn secondary">
-              Download
+
+            <a
+              href={cvUrl}
+              download="Miroslaw-Mus-CV.pdf"
+              className="btn secondary"
+            >
+              Download CV
             </a>
           </div>
         </div>
 
         <div className="pdf-wrap">
-          <object data={cvUrl} type="application/pdf" width="100%" height="900">
+          <object
+            data={cvUrl}
+            type="application/pdf"
+            width="100%"
+            height="900"
+            aria-label="Miroslaw Mus CV"
+          >
             <p>
-              Your browser can’t display PDFs.
-              <a href={cvUrl} target="_blank" rel="noopener">
+              Your browser cannot display the PDF.{" "}
+              <a href={cvUrl} target="_blank" rel="noopener noreferrer">
                 Open CV
               </a>
             </p>

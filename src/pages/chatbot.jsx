@@ -4,9 +4,10 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Hi — I’m Mireqq Assistant. Ask me about Miroslaw Mus, his projects, skills, or experience.",
+      text: "Hi — I’m Mireqq Assistant. Ask me about Miroslaw Mus, his data analytics experience, projects, technical skills, or professional background.",
     },
   ]);
+
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,10 +21,16 @@ export default function Chatbot() {
 
   async function onSend(e) {
     e.preventDefault();
+
     const text = input.trim();
+
     if (!text || loading) return;
 
-    const userMessage = { role: "user", text };
+    const userMessage = {
+      role: "user",
+      text,
+    };
+
     setMessages((m) => [...m, userMessage]);
     setInput("");
     setLoading(true);
@@ -34,7 +41,9 @@ export default function Chatbot() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+        }),
       });
 
       const data = await res.json();
@@ -49,10 +58,12 @@ export default function Chatbot() {
 
         setMessages((m) => {
           const updated = [...m];
+
           updated[updated.length - 1] = {
             ...updated[updated.length - 1],
             text: reply.slice(0, i),
           };
+
           return updated;
         });
 
@@ -69,6 +80,7 @@ export default function Chatbot() {
           text: "Temporary issue — please try again.",
         },
       ]);
+
       setLoading(false);
     }
   }
@@ -77,8 +89,10 @@ export default function Chatbot() {
     <main className="page">
       <section className="card">
         <h1>AI Chatbot</h1>
+
         <p className="muted">
-          Ask about my background, projects, technologies, and experience.
+          Ask about my data analytics experience, projects, technologies, and
+          professional background.
         </p>
 
         <div className="chat">
@@ -88,6 +102,7 @@ export default function Chatbot() {
                 {m.text}
               </div>
             ))}
+
             {loading && <div className="msg bot loading">Typing</div>}
           </div>
 
@@ -100,6 +115,7 @@ export default function Chatbot() {
               }
               disabled={loading}
             />
+
             <button className="btn" type="submit" disabled={loading}>
               {loading ? "..." : "Send"}
             </button>

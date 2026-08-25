@@ -5,7 +5,11 @@ export default function Contact() {
     <main className="page">
       <section className="card">
         <h1>Contact</h1>
-        <p className="muted">Feel free to reach out or explore my work.</p>
+
+        <p className="muted">
+          I am currently interested in Graduate and Junior Data Analyst
+          opportunities in London. Feel free to get in touch or explore my work.
+        </p>
 
         <div className="contact-links">
           <a href="mailto:miroslaw.k.mus@gmail.com">Email</a>
